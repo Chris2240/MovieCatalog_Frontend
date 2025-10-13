@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using MovieCatalog_Frontend.Services;
 
 namespace MovieCatalog_Frontend
 {
@@ -12,6 +13,9 @@ namespace MovieCatalog_Frontend
             builder.RootComponents.Add<HeadOutlet>("head::after");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+            // Register my MovieService
+            builder.Services.AddScoped<MovieService>();
 
             await builder.Build().RunAsync();
         }
