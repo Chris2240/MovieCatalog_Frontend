@@ -1,0 +1,64 @@
+﻿@page "/all-movies"
+
+@inject MovieService MovieService
+
+<PageTitle>All Movies</PageTitle>
+
+<nav id="back-to-home">
+	<NavLink class="nav-link" href="/">Back to Home</NavLink>
+</nav>
+
+<h1 class="page_title">Movie Catalog List</h1>
+
+
+@if (movies == null)
+{
+	<p>Loading movies...</p>
+}
+
+else if(!movies.Any())
+{
+	<p>No movies found.</p>
+}
+else
+{
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Title</th>
+				<th>Genre</th>
+				<th>Year</th>
+				<th>Rating</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+			@foreach(var movie in movies)
+			{
+				<tr>
+					<td>@movie.Id</td>
+					<td>@movie.Title</td>
+					<td>@movie.Genre</td>
+					<td>@movie.Year</td>
+					<td>@movie.Rating</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+
+
+@code {
+
+	// Field to hold the list of movies
+	private List<Movie>? movies;
+
+	// OnInitializedAsync method to fetch movies when the component initializes
+	protected override async Task OnInitializedAsync()
+	{
+		// Fetch all movies using the MovieService injected service
+		movies = await MovieService.GetAllMoviesAsync();
+	}
+
+}

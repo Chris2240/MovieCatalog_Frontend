@@ -75,3 +75,60 @@
 code {
     color: #c02d76;
 }
+
+
+/* normalize/remove default spacing that affects page layout */
+html, body {
+    margin-left: 5px;
+    padding: 0;
+}
+
+
+/* Custom styling for the page title and table */
+.page_title {
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table, th, td {
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    width: auto;
+}
+
+tr {
+    text-align: center;
+}
+
+
+/* move all nav-links to the botom & creating button nav-link */
+#nav-links {
+    margin-top: 50px;
+
+}
+
+.nav-link {
+    width: fit-content;
+    font-size: 0.8rem;
+    padding: 10px;
+    border: 2px solid white;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: gold;
+    color: sandybrown;
+}
+
+/* Back to "Home" navigation */
+#back-to-home{
+    margin-top: 20px;
+}
