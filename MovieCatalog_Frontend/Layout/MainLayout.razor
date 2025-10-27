@@ -1,3 +1,11 @@
 ﻿@inherits LayoutComponentBase
+@using MovieCatalog_Frontend.Shared
 
-@Body
+
+<div id="layout">	@* The whole content of the layout of webpage *@
+	<Sidebar/>
+
+	<main id="main-content">	@* Main content area *@
+		@Body
+	</main>
+</div>
