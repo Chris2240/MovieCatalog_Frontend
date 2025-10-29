@@ -1,0 +1,81 @@
+﻿@page "/top-rated"
+
+@inject MovieService MovieService
+
+<PageTitle>Top Rated Movie(s)</PageTitle>
+
+<h1 class="page_title">Top Rated Movie(s): </h1>
+
+<div>
+	<label>Please provide the number of movies to display as top rated from our database: </label>
+	<input type="text" placeholder="1" min="0" style="width: 30px" @bind="topRatedInput"/>
+	<br /><br />
+	<button @onclick="GetTopRatedMovie" class="nav-link">Check</button>
+</div>
+
+<br>
+
+@if(!string.IsNullOrEmpty(errorMessage))
+{
+	<p style="color: red;">@errorMessage</p>
+}
+
+@if(movies == null)
+{
+	<p>No data yet. Please select a number and click "Check".</p>
+}
+else if(!movies.Any())
+{
+	<p>No movies found.</p>
+}
+else
+{
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Title</th>
+				<th>Genre</th>
+				<th>Year</th>
+				<th>Rating</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach(var movie in movies)
+			{
+				<tr>
+					<td>@movie.Id</td>
+					<td>@movie.Title</td>
+					<td>@movie.Genre</td>
+					<td>@movie.Year</td>
+					<td>@movie.Rating</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+
+
+
+@code {
+	private List<Movie>? movies;    // List of top rated movies
+	
+	private string? topRatedInput; // If user provide the string instead of integer number
+	private int topRated;   // Number of top rated movies to fetch
+	private string? errorMessage;   // Error message for invalid input
+
+	private async Task GetTopRatedMovie()
+	{
+		// Try to parse the user input to an integer
+		if (int.TryParse(topRatedInput, out topRated))  // tries to convert the string (e.g. "1") into an integer; if successful, stores the output value in "topRated" variable
+		{
+			errorMessage = null;    // Clear previous error message if any exists
+			movies = await MovieService.GetTopRatedMovieAsync(topRated);    // Fetch top rated movies from the service
+		}
+		else
+		{
+			errorMessage = "Please provide a valid number.";    //	Set error message for invalid input
+			movies = null;
+		}
+	}
+}
