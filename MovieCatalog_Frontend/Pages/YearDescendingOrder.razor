@@ -1,0 +1,50 @@
+﻿@page "/yearDescendingOrder"
+@inject MovieService MovieService
+
+<PageTitle>Movies by Year Descending Order</PageTitle>
+
+<h1 class="page_title">Displaying movies list in descending order by year:</h1>
+
+@if (movies == null)
+{
+	<p>Loading...</p>
+}
+else if (!movies.Any())
+{
+	<p>There is no movie in database.</p>
+}
+else
+{
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Title</th>
+				<th>Genre</th>
+				<th>Year</th>
+				<th>Rating</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach(var m in movies)
+			{
+				<tr>
+					<td>@m.Id</td>
+					<td>@m.Title</td>
+					<td>@m.Genre</td>
+					<td>@m.Year</td>
+					<td>@m.Rating</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+
+@code {
+	private List<Movie>? movies;
+
+	protected override async Task OnInitializedAsync()
+	{
+		movies = await MovieService.GetMovieByDescendingOrder();
+	}
+}
