@@ -1,0 +1,60 @@
+﻿@page "/rated"
+@inject MovieService MovieService
+
+<PageTitle>Rated Movies</PageTitle>
+
+<h1 class="page_title">Rated Movie</h1>
+
+<div>
+	<label>Please provide the "movie rate" to see the movie:</label>
+	<input type="number" placeholder="8.5" style="width: 40px" @bind="rate"/>
+	<br /><br />
+	<button class="nav-link" @onclick="GetByRatedAsync">Check</button>
+</div>
+
+<br />
+
+@if(movie == null)
+{
+	<p>Please select the rating number to display the movie.</p>
+}
+else if(!movie.Any())
+{
+	<p>No movie found.</p>
+}
+else
+{
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Title</th>
+				<th>Genre</th>
+				<th>Year</th>
+				<th>Rating</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach(var m in movie)
+			{
+				<tr>
+					<td>@m.Id</td>
+					<td>@m.Title</td>
+					<td>@m.Genre</td>
+					<td>@m.Year</td>
+					<td>@m.Rating</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+
+@code {
+	private List<Movie>? movie;
+	private double rate;
+
+	private async Task GetByRatedAsync()
+	{
+		movie = await MovieService.GetByRated(rate);
+	} 
+}
