@@ -1,0 +1,92 @@
+﻿@page "/genre"
+@inject MovieService MovieService
+
+<PageTitle>Genre Movies</PageTitle>
+
+<h1 class="page_title">Displaying Movies by "Genre":</h1>
+
+<div>
+	<label>Please enter "genre" of movie to display below:</label>
+	<input type="text" placeholder="e.g. comedy" style="width: 80px" @bind="genreInput" />
+	<br /><br />
+	<button class="nav-link" @onclick="GetMovieByGenreAsync">Check</button>
+</div>
+
+<br />
+
+@if(movie == null)
+{
+	<p>Please enter the "genre" to display movie(s) below:</p>
+}
+else if (!movie.Any())
+{
+	<p>No movie found.</p>
+}
+else
+{
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Title</th>
+				<th>Genre</th>
+				<th>Year</th>
+				<th>Rating</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach(var m in movie)
+			{
+				<tr>
+					<td>@m.Id</td>
+					<td>@m.Title</td>
+					<td>@m.Genre</td>
+					<td>@m.Year</td>
+					<td>@m.Rating</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+
+@code {
+	// private List<Movie>? movie;
+	// private string? genre;
+	// private string? genreInput;
+
+	// private async Task GetMovieByGenreAsync()
+	// {
+	// 	genre = genreInput ?? string.Empty;
+
+	// 	if (string.IsNullOrEmpty(genre))
+	// 	{
+	// 		movie = null;
+	// 		Console.WriteLine("Please enter a genre before searching.");
+	// 	}
+
+	// 	movie = await MovieService.GetMovieByGenre(genre);
+	// }
+
+	
+	private List<Movie>? movie;
+	private string? genre;
+	private string? genreInput;
+	private string? error; // To hold error message
+
+	private async Task GetMovieByGenreAsync()
+	{
+		try
+		{
+			genre = genreInput ?? string.Empty; // Assign input or empty string
+			movie = await MovieService.GetMovieByGenre(genre);  // Fetch movies by genre
+			error = null;   // Clear previous error message if any
+		}
+		catch (HttpRequestException ex)
+		{
+			error = ex.Message; // Set error message
+			movie = new List<Movie>();	// Set movie to empty list on error
+		}
+	}
+	
+}
+
