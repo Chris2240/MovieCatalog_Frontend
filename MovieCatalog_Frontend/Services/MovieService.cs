@@ -45,7 +45,7 @@ namespace MovieCatalog_Frontend.Services
         // Get movie by genre
         public async Task<List<Movie>> GetMovieByGenre(string genre)
         {
-            return await _httpClient.GetFromJsonAsync<List<Movie>>($"{_baseUrl}/genre={genre}") ?? new List<Movie>();
+            return await _httpClient.GetFromJsonAsync<List<Movie>>($"{_baseUrl}/genre/{genre}") ?? new List<Movie>();
         }
 
         // Get movie by Id, title, and genre
