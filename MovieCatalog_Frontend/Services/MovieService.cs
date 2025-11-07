@@ -48,10 +48,36 @@ namespace MovieCatalog_Frontend.Services
             return await _httpClient.GetFromJsonAsync<List<Movie>>($"{_baseUrl}/genre/{genre}") ?? new List<Movie>();
         }
 
-        // Get movie by Id, title, and genre
-        public async Task<List<Movie>> GetMovieByIdTitleGenre(int id_selected)
+        //// Get movie by Id, title, and genre
+        //public async Task<List<Movie>> GetMovieByIdTitleGenre(int id_selected)
+        //{
+        //    return await _httpClient.GetFromJsonAsync<List<Movie>>($"{_baseUrl}/id/title/genre/{id_selected}") ?? new List<Movie>();
+        //}
+
+        // Get movie by Id, title, and genre with error BadRequest handling in frontend
+
+        public async Task<(List<Movie> Movies, string? ErrorMessage)> GetMovieByIdTitleGenre(int id_selected)
         {
-            return await _httpClient.GetFromJsonAsync<List<Movie>>($"{_baseUrl}/id/title/genre/{id_selected}") ?? new List<Movie>();
+            try
+            {
+                var response = await _httpClient.GetAsync($"{_baseUrl}/id/title/genre/{id_selected}");  // Send GET request
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var movies = await response.Content.ReadFromJsonAsync<List<Movie>>();   // Deserialize (convert JSON to object) in successful response
+                    return (movies ?? new List<Movie>(), null); // return movie or empty list
+                }
+                else
+                {
+                    // Read the "backend BadRequest" message
+                    var errorMessage = await response.Content.ReadAsStringAsync();  // Read error (BadRequest) message from response
+                    return (new List<Movie>(), errorMessage);   // return empty list with error message
+                }
+            }
+            catch (Exception ex)
+            {
+                return (new List<Movie>(), ex.Message); // return empty list with exception message
+            }
         }
 
 
