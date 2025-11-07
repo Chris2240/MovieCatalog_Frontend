@@ -1,0 +1,101 @@
+﻿@page "/IdTitleGenre"
+@inject MovieService MovieService
+
+<PageTitle>IdTitleGenre</PageTitle>
+
+<h1 class="page_title">Displaying Id, Title and Genre:</h1>
+
+<div>
+	<label>Please enter the "Id" to display Id, Title and Genre of movie:</label>
+	<input type="number" placeholder="e.g. 2" style="width: 50px" @bind="inputUser"/>
+	<br /><br />
+	<button class="nav-link" @onclick="GetIdTitleGenreByIdAsync">Check</button>
+</div>
+
+@if(movie == null)
+{
+	<p>Please enter "Id" </p>
+}
+else if (movie.Count() <= 0)
+{
+	<p>No movie found.</p>
+}
+else
+{
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Title</th>
+				<th>Genre</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach(var m in movie)
+			{
+				<tr>
+					<td>@m.Id</td>
+					<td>@m.Title</td>
+					<td>@m.Genre</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+@if (!string.IsNullOrEmpty(badRequest))  // Display BadRequest message if exists
+{
+	<p style="color: red">@badRequest</p>
+}
+
+
+@code {
+	// private List<Movie>? movie;
+	// private int inputUser;
+	// private int id;
+
+	// private async Task GetIdTitleGenreByIdAsync()
+	// {
+	// 	id = inputUser;
+
+	// 	movie = await MovieService.GetMovieByIdTitleGenre(id);
+	// }
+
+	
+	/*
+	// Enhanced version with error handling but with no BadRequest (400) handling without updating MovieService.cs method "GetMovieByIdTitleGenre"
+	private List<Movie>? movie;
+	private int inputUser;
+	private string? errorMessage;
+
+	private async Task GetIdTitleGenreByIdAsync()
+	{
+		try
+		{
+			movie = await MovieService.GetMovieByIdTitleGenre(inputUser);
+
+			errorMessage = null;	// clear error if any exist
+
+			}
+		catch(HttpRequestException ex)
+		{
+			errorMessage = ex.Message;  // set error message to display in UI
+			movie = new List<Movie>(); // clear movie list to avoid showing old data and show "No movie found."
+			}
+		}
+	*/
+
+	
+	
+	// Enhanced version with error handling including BadRequest (400) handling after updating MovieService.cs method "GetMovieByIdTitleGenre"
+	private List<Movie>? movie;
+	private int inputUser;
+	private string? badRequest; // to hold BadRequest message
+
+	private async Task GetIdTitleGenreByIdAsync()
+	{
+		var result = await MovieService.GetMovieByIdTitleGenre(inputUser);
+
+		movie = result.Movies;  // set movie list - the "Movies" is from MovieService.cs "GetMovieByIdTitleGenre" method return type.
+		badRequest = result.ErrorMessage; // set error message to display in UI
+	}	
+}
