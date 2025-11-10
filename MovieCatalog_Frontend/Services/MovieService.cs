@@ -38,7 +38,7 @@ namespace MovieCatalog_Frontend.Services
         // Get all movies in descending order by year
         public async Task<List<Movie>> GetMovieByDescendingOrder()
         {
-            var result = await _httpClient.GetFromJsonAsync<List<Movie>>($"{_baseUrl}/deccending order by year");
+            var result = await _httpClient.GetFromJsonAsync<List<Movie>>($"{_baseUrl}/descending-order-by-year");
             return result ?? new List<Movie>();
         }
 
@@ -91,7 +91,7 @@ namespace MovieCatalog_Frontend.Services
         */
         public async Task<Movie?> CreateMovieAsync(Movie newMovie)  // "Task<Movie?>" - This endpoint only return the CREATED movie object, not a list
         {
-            var createMovieResponse = await _httpClient.PostAsJsonAsync($"{_baseUrl}/create new movie", newMovie);
+            var createMovieResponse = await _httpClient.PostAsJsonAsync($"{_baseUrl}/create-new-movie", newMovie);
             return await createMovieResponse.Content.ReadFromJsonAsync<Movie>();
         }
 
