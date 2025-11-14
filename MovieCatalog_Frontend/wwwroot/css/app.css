@@ -124,8 +124,8 @@ tr {
     border-radius: 6px;
     text-decoration: none;
     cursor: pointer;
-    background-color: gold;
-    color: sandybrown;
+    background-color: blue;
+    color: white;
     display: block;         /* this makes the link available margin */
     margin-bottom: 5px;
 }
@@ -156,4 +156,70 @@ tr {
     margin-left: 240px; /* offset for sidebar width + padding */
     padding: 1rem;
     width: calc(100% - 240px);
+}
+
+
+/* New page(green), Update(orange) and Delete(red) nav-links*/
+.nav-link-green {
+    width: fit-content;
+    font-size: 0.8rem;
+    padding: 10px;
+    border: 2px solid white;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: green;
+    color: sandybrown;
+    display: block; /* this makes the link available to do a margin */
+    margin-bottom: 5px;
+}
+
+.nav-link-orange {
+    width: fit-content;
+    font-size: 0.8rem;
+    padding: 10px;
+    border: 2px solid white;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: orange;
+    color: white;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.nav-link-red {
+    width: fit-content;
+    font-size: 0.8rem;
+    padding: 10px;
+    border: 2px solid white;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: red;
+    color: white;
+    display: block;
+    margin-bottom: 5px;
+}
+
+
+/* create movie content */
+#create-movie-div {
+    display: grid;
+    grid-template-columns: auto 1fr; /* label & input make within a column */
+    align-items: center; /* vertically centers labels and inputs */
+    gap: 5px 10px; /* row gap | column gap */
+    padding: 10px;
+    margin-top: 30px;
+    max-width: 300px; /* optional, keeps layout compact */
+}
+
+#create-movie-div label {
+    text-align: center; /* aligns labels neatly */
+
+}
+
+#create-movie-div button {
+    margin-top: 30px;
+
 }
