@@ -89,13 +89,38 @@ namespace MovieCatalog_Frontend.Services
             - This matches the backend controller signature:
             - [HttpPost("create new movie")] public ActionResult CreateMovie(Movie newMovie)
         */
-        public async Task<Movie?> CreateMovieAsync(Movie newMovie)  // "Task<Movie?>" - This endpoint only return the CREATED movie object, not a list
+        //public async Task<Movie?> CreateMovieAsync(Movie newMovie)  // "Task<Movie?>" - This endpoint only return the CREATED movie object, not a list
+        //{
+        //    var createMovieResponse = await _httpClient.PostAsJsonAsync($"{_baseUrl}/create-new-movie", newMovie);
+        //    return await createMovieResponse.Content.ReadFromJsonAsync<Movie>();
+        //}
+
+        // Create a new movie (POST) - corrected version with error handling
+        public async Task<(Movie? existMovie, string? error)> CreateMovieAsync(Movie newMovie) // tuple return type
         {
-            var createMovieResponse = await _httpClient.PostAsJsonAsync($"{_baseUrl}/create-new-movie", newMovie);
-            return await createMovieResponse.Content.ReadFromJsonAsync<Movie>();
+            try
+            {
+                var response = await _httpClient.PostAsJsonAsync($"{_baseUrl}/create-new-movie", newMovie);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var existMovie = await response.Content.ReadFromJsonAsync<Movie>(); // Deserialize created movie (convert JSON to object)
+                    return (existMovie, null); // return created movie with no error
+                }
+                else
+                {
+                    // Read the "backend BadRequest" message
+                    var errorMessage = await response.Content.ReadAsStringAsync();  // Read error (BadRequest) message from response
+                    return (null, errorMessage);   // return null movie with error message
+                }
+            }
+            catch(Exception ex)
+            {
+                return (null, ex.Message); // return null movie with exception message
+            }
         }
 
-        
+
         // Update movie (PUT)
         /*
             - This method sends both the Movie ID (in the URL) and the updated Movie data (in the request body) to match the backend endpoint structure:
