@@ -1,0 +1,79 @@
+﻿@page "/createNewPage"
+@inject MovieService MovieService
+
+<PageTitle>New Page</PageTitle>
+
+<h1 class="page_title">Creating "New Page"</h1>
+
+<p>Please fill the following fields to create a new page:</p>
+
+<div id="create-movie-div">
+	<label for="id">Id: </label>
+	<input type="number" name="id" required style="width: 50px" @bind="id" />
+
+	<label for="title">Title:</label>
+	<input type="text" name="title" style="width: 100px" @bind="title" />
+
+	<label for="genre">Genre:</label>
+	<input type="text" name="genre" style="width: 100px" @bind="genre" />
+
+	<label for="year">Year:</label>
+	<input type="number" name="year" style="width: 50px" @bind="year" />
+
+	<label for="rating">Rating:</label>
+	<input type="number" name="rating" style="width: 50px" @bind="rating" />
+
+	<button class="nav-link-green" @onclick="CreateNewMovieAsync">Create</button>
+</div>
+
+@if (!string.IsNullOrEmpty(badRequest))
+{
+	<p style="color: red">@badRequest</p>
+}
+else if (createdMovie != null)
+{
+	<p>The new movie with Id: <strong>'@createdMovie?.Id'</strong> has been created successfully and added to the movie list.</p>
+}
+
+
+
+@code {
+	private int id;
+	private string? title;
+	private string? genre;
+	private int year;
+	private double rating;
+
+	private Movie? createdMovie;    // The newly created movie
+	private string? badRequest;
+
+	private async Task CreateNewMovieAsync()
+	{
+		// Create a new Movie object with the provided details
+		var newMovie = new Movie
+		{
+			Id = id,
+			Title = string.IsNullOrWhiteSpace(title) ? "'No Title entered'" : title,
+			Genre = string.IsNullOrWhiteSpace(genre) ? "'No Genre entered'" : genre,
+			Year = year,
+			Rating = rating,
+		};
+
+
+		// Call the service to create the new movie
+		var result = await MovieService.CreateMovieAsync(newMovie); // Assuming CreateMovieAsync returns an object with existMovie and error properties
+		createdMovie = result.existMovie; // If the movie already exists, this will be set
+		badRequest = result.error; // If there was a bad request error, this will be set
+
+		// Reset fields ONLY if there was no error
+		if(badRequest == null)	// No error occurred
+		{
+			id = 0;
+			title = string.Empty;
+			genre = string.Empty;
+			year = 0;
+			rating = 0;
+		}
+
+	}
+}
