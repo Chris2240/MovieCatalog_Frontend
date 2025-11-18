@@ -1,0 +1,112 @@
+﻿@page "/update-movie"
+@inject MovieService MovieService
+
+<h1 class="page_title">Movie To Update:</h1>
+
+<div id="movie-grid">
+	<label>Please enter the <strong>"Id"</strong> of the movie which you want to update:</label>
+	<input type="number" placeholder="e.g. 1" style="width: 70px" required @bind="userInput" />
+	<br /><br />
+	<button class="nav-link" @onclick="CheckMovie">Check</button>
+</div>
+
+@if (existingMovie != null)
+{
+	<EditForm Model="@existingMovie" OnValidSubmit="UpdateAndSubmit">	@* Bind the form to "existingMovie" and handle submission *@
+		<DataAnnotationsValidator /> @* Enable validation based on data annotations (Data annotations are validation rules applied to the properties of your model(Movie.cs)). *@
+
+		<div class="movie-grid-div">
+
+			<label for="id">Id: </label>
+			<input type="number" id="id" @bind="existingMovie.Id" readonly />
+
+			<label for="title">Title: </label>
+			<input type="text" id="title" @bind="existingMovie.Title" />
+
+			<label for="genre">Genre: </label>
+			<input type="text" id="genre" @bind="existingMovie.Genre" />
+
+			<label for="year">Year: </label>
+			<input type="number" id="year" @bind="existingMovie.Year" />
+
+			<label for="rating">Rating: </label>
+			<input type="number" id="rating" step="0.1" @bind="existingMovie.Rating" />
+
+			<button type="submit" class="nav-link-orange">Save Changes</button>
+			<br /><br />			
+
+		</div>
+
+	</EditForm>
+}
+
+@if (!string.IsNullOrWhiteSpace(messageSuccess))
+{
+	<p style="color: green">@messageSuccess</p>
+}
+
+@if (!string.IsNullOrWhiteSpace(messageNegat))
+{
+	<p style="color: red">@messageNegat</p>
+}
+
+@code {
+	private Movie? existingMovie;
+	private int userInput;
+
+	private string? messageSuccess;
+	private string? messageNegat;
+
+	private async Task CheckMovie()
+	{
+		// clear previous messages if any exists
+		messageSuccess = null;
+		messageNegat = null;
+
+		// validate user input
+		if (userInput <= 0)
+		{
+			messageNegat = "Invalid Id. Please enter the 'id' greater than 0.";
+			existingMovie = null;
+			return; // exit the method if input is invalid and prevents adding other remaining messages which are left in this method
+		}
+
+		/*
+			IMPORTANT NOTE:
+
+			* This fetching solution is only provided because this project has only a few movies in database.
+
+			* In a real-world application, I would typically have an implemented a new method in the backend e.g. (GetMovieById(int id))
+			  to prevent fetching all movies from the database just to find one movie by its id.
+
+			* Then integrate this method in "MovieService.cs" in frontend(as others methods from backend), then call that service in razor file to fetch a movie by "id".
+
+		*/
+
+		// fetch all movies and check if movie with given "id" exists
+		var movies = await MovieService.GetAllMoviesAsync();
+		existingMovie = movies.FirstOrDefault(m => m.Id == userInput);
+
+		// set negative message if movie not found
+		if (existingMovie == null)
+		{
+			messageNegat = $"Movie with id {userInput} not found.";
+			userInput = 0;
+		}
+	}
+
+	private async Task UpdateAndSubmit()
+	{
+		if (existingMovie != null)
+		{
+			await MovieService.UpdateMovieAsync(existingMovie.Id, existingMovie);   // Call the service to update the movie
+
+			messageSuccess = $"The movie of id: '{existingMovie.Id}' is updated successfully.";
+
+			// hide the "EditForm" content but keep the success message visible
+			existingMovie = null;
+			userInput = 0;
+			return;
+		}
+	}
+}
