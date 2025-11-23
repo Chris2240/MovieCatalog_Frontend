@@ -1,0 +1,71 @@
+﻿@page "/delete-movie"
+@inject MovieService MovieService
+
+<PageTitle>Delete Movie</PageTitle>
+
+<h1 class="page_title">Delete Movie:</h1>
+
+<p>Please select the <strong>"Movie"</strong> which you want to delete:</p>
+<br />
+<br />
+
+@if(allMovies == null)
+{
+	<p>Loading...</p>
+}
+else if (!allMovies.Any())
+{
+	<p>No movie found.</p>
+}
+else
+{
+	<table>
+		<thead>
+			<tr>
+				<td>Id</td>
+				<td>Title</td>
+				<td>Genre</td>
+				<td>Year</td>
+				<td>Rating</td>
+				<td>Delete</td>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var m in allMovies)
+			{
+				<tr>
+					<td>@m.Id</td>
+					<td>@m.Title</td>
+					<td>@m.Genre</td>
+					<td>@m.Year</td>
+					<td>@m.Rating</td>
+					<td>
+						<button class="nav-link-red" @onclick="() => DeleteMovie(m.Id)">Delete</button>	@* lambda expression added because it allows passing parameters to the method *@
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+
+@code {
+	private List<Movie>? allMovies; // List to hold all movies
+
+	// OnInitializedAsync method to fetch movies when the component initializes
+	protected override async Task OnInitializedAsync()
+	{
+		allMovies = await MovieService.GetAllMoviesAsync();
+	}
+
+	// delete the movie
+	private async Task DeleteMovie(int id)
+	{
+		bool deleted = await MovieService.DeleteMovieAsync(id);
+
+		if (deleted)
+		{
+			// Refresh the movie list after deletion
+			allMovies = await MovieService.GetAllMoviesAsync();
+		}
+	}
+}
