@@ -74,6 +74,11 @@ else if (createdMovie != null)
 			year = 0;
 			rating = 0;
 		}
+		// Ensure the "id" is non-negative
+		else if (id < 0)
+		{
+			id = 0;
+		}
 
 	}
 }
