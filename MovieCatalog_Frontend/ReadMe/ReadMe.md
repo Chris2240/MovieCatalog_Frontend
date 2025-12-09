@@ -38,6 +38,7 @@ This Blazor UI application is built using the following technologies:
 * Dependency Injection (Service)
 * Service Layer Pattern (MovieService)
 
+<a id="getting-started"></a>
 ## Getting Started
 To get started with the MovieCatalog Frontend, follow these steps:
 
@@ -76,7 +77,9 @@ To get started with the MovieCatalog Frontend, follow these steps:
 	```
 Now you are able to open the browser using **Blazor UI** with the following path: `http://localhost:5269` to check and test all Http endpoints ;)
 
+<a id="features"></a>
 ## Features
+
 * ### Home Page:
 
 	This page is introduce the user to the MovieCatalog_Frontend application with a welcome message and brief description.
@@ -103,7 +106,7 @@ Now you are able to open the browser using **Blazor UI** with the following path
 
 	This page displays the movie depending on rate providing via user.
 
-	<img src="./ScreenShots_Readme/Screenshot 6.jpg" width="70%">
+	<img src="./Screenshots_Readme/Screenshot 6.jpg" width="70%"/>
 	<br/><br/>
 
 	<img src="./Screenshots_Readme/Screenshot 7.jpg" width="70%"/>
@@ -113,90 +116,93 @@ Now you are able to open the browser using **Blazor UI** with the following path
 
 	This page displaying the movies list in descending order by year.
 
-	<img src="./ScreenShots_Readme/Screenshot 8.jpg" width="70%">
+	<img src="./Screenshots_Readme/Screenshot 8.jpg" width="70%"/>
 	<br/><br/>
 
 * ### Genre Movie(s) List:
 
 	This page displays the movies depending on what user "genre" enters.
 
-	<img src="./ScreenShots_Readme/Screenshot 9.jpg" width="70%">
+	<img src="./Screenshots_Readme/Screenshot 9.jpg" width="70%"/>
 	<br/><br/>
 
-	<img src="./ScreenShots_Readme/Screenshot 10.jpg" width="70%">
+	<img src="./Screenshots_Readme/Screenshot 10.jpg" width="70%"/>
 	<br/><br/>
 
 * ### Displaying Id, Title and Genre:
 
 	This page displays the movie id, title and genre only, via user "Id" enter. 
 
-	<img src="./ScreenShots_Readme/Screenshot 11.jpg" width="70%">
+	<img src="./Screenshots_Readme/Screenshot 11.jpg" width="70%"/>
 	<br/><br/>
 
-	<img src="./ScreenShots_Readme/Screenshot 12.jpg" width="70%">
+	<img src="./Screenshots_Readme/Screenshot 12.jpg" width="70%"/>
 	<br/><br/>
 
-	<img src="./ScreenShots_Readme/Screenshot 13.jpg" width="70%">
+	<img src="./Screenshots_Readme/Screenshot 13.jpg" width="70%"/>
 	<br/><br/>
 
 * ### Create a new page:
 
 	This page allowed the user to create a new page.
 
-	<img src="./ScreenShots_Readme/Screenshot 14.jpg" width="70%">
+	<img src="./Screenshots_Readme/Screenshot 14.jpg" width="70%"/>
 	<br/><br/>
 
-	<img src="./ScreenShots_Readme/Screenshot 15.jpg" width="70%">
+	<img src="./Screenshots_Readme/Screenshot 15.jpg" width="70%"/>
 	<br/><br/>
 
-	<img src="./ScreenShots_Readme/Screenshot 16.jpg" width="70%">
+	<img src="./Screenshots_Readme/Screenshot 16.jpg" width="70%"/>
 	<br/><br/>
 
 	Then at **All Movies** page the new movie is displayed as expected:
 
-	<img src="./ScreenShots_Readme/Screenshot 17.jpg" width="70%">
+	<img src="./Screenshots_Readme/Screenshot 17.jpg" width="70%"/>
 	<br/><br/>
 
 * ### Update Movie:
 
 	This page allows the user to update an existing movie by entering its "Id".
 
-	<img src="./ScreenShots_Readme/Screenshot 18.jpg" width="70%">
+	<img src="./Screenshots_Readme/Screenshot 18.jpg" width="70%"/>
 	<br/><br/>
 
-	<img src="./ScreenShots_Readme/Screenshot 19.jpg" width="70%">
+	<img src="./Screenshots_Readme/Screenshot 19.jpg" width="70%"/>
 	<br/><br/>
 
-	<img src="./ScreenShots_Readme/Screenshot 20.jpg" width="70%">
+	<img src="./Screenshots_Readme/Screenshot 20.jpg" width="70%"/>
 	<br/><br/>
 
-	<img src="./ScreenShots_Readme/Screenshot 21.jpg" width="70%">
+	<img src="./Screenshots_Readme/Screenshot 21.jpg" width="70%"/>
 	<br/><br/>
 
-	<img src="./ScreenShots_Readme/Screenshot 22.jpg" width="70%">
+	<img src="./Screenshots_Readme/Screenshot 22.jpg" width="70%"/>
 	<br/><br/>
 
 	Then you can see the updated movie at **All Movies** page as expected:
 
-	<img src="./ScreenShots_Readme/Screenshot 23.jpg" width="70%">
+	<img src="./Screenshots_Readme/Screenshot 23.jpg" width="70%"/>
 	<br/><br/>
 
 * ### Delete Movie:
 
 	This page allows the user to delete an existing movie by pressing the "Delete" button.
-	
-	<img src="./ScreenShots_Readme/Screenshot 24.jpg" width="70%">
+
+	<img src="./Screenshots_Readme/Screenshot 24.jpg" width="70%"/>
 	<br/><br/>
-	
-	<img src="./ScreenShots_Readme/Screenshot 25.jpg" width="70%">
+
+	<img src="./Screenshots_Readme/Screenshot 25.jpg" width="70%"/>
 	<br/><br/>
 	
 	Then you can see that the movie is deleted at **All Movies** page as expected:
-	
-	<img src="./ScreenShots_Readme/Screenshot 26.jpg" width="70%">
+
+	<img src="./Screenshots_Readme/Screenshot 26.jpg" width="70%"/>
 	<br/><br/>
 
+<a id="implementation-details"></a>
 ## Implementation details
+
+<a id="backend-integration"></a>
 * ### Backend Integration:
 
 	Uses HttpClient to send and receive JSON data from the Web API.
@@ -247,7 +253,8 @@ Now you are able to open the browser using **Blazor UI** with the following path
 	}
 	```
 
-* ### Home Page: {#home-page-impl}
+<a id="home-page-impl"></a>
+* ### Home Page:
 	In this app as you can see I provide the side bar navigation menu to access different sections of the application. In this case I wanted show how I achived it using the CSS and Blazor components. Also I added some styling to make the UI more appealing:
 	
 	At **app.css:**
@@ -431,7 +438,8 @@ Now you are able to open the browser using **Blazor UI** with the following path
 	}
 	```
 
-* ### All Movies: {#all-movies-impl}
+<a id="all-movies-impl"></a>
+* ### All Movies:
 	That was my first page where I wanted to retrieve data for first time and I had encountered this specific issue. That was happening because of the “CORS” (Cross-Origin Resource Sharing). It’s a browser security feature that controls how web pages can request resources (like APIs, images, or data) from a different origin (domain, port, or protocol) than the one the page was loaded from. In my case it was blocking access to this API in frontend calls. To solve this issue I have to add unblocking code to the **Program.cs** file in the *“MovieCatalog”* backend version.
 
 	<img src="./Screenshots_Readme/Screenshot 3.jpg" width="60%"/>
@@ -556,7 +564,8 @@ Now you are able to open the browser using **Blazor UI** with the following path
 
 	```
 
-* ### Top Rated Movie(s): {#top-rated-movies-impl}
+<a id="top-rated-movies-impl"></a>
+* ### Top Rated Movie(s):
 	The code for this page is at following files:
 
 	At **MovieServices.cs:**
@@ -655,7 +664,8 @@ Now you are able to open the browser using **Blazor UI** with the following path
 	}
 	```
 
-* ### Rated Movie: {#rated-movie-impl}
+<a id="rated-movie-impl"></a>
+* ### Rated Movie:
 	The code for this page is at following files:
 
 	At **MovieServices.cs:**
@@ -733,7 +743,8 @@ Now you are able to open the browser using **Blazor UI** with the following path
 
 	```
 
-* ### Descending order by year: {#descending-order-by-year-impl}
+<a id="descending-order-by-year-impl"></a>
+* ### Descending order by year:
 	The code for this page is at following files:
 
 	At **MovieServices.cs:**
@@ -801,7 +812,8 @@ Now you are able to open the browser using **Blazor UI** with the following path
 	}
 	```
 
-* ### Genre Movie(s)List: {#genre-movie-list-impl}
+<a id="genre-movie-list-impl"></a>
+* ### Genre Movie(s)List:
 	The code for this page is at following files:
 
 	At **MovieServices.cs:**
@@ -894,7 +906,8 @@ Now you are able to open the browser using **Blazor UI** with the following path
 	}
 	```
 
-* ### Displaying Id, Title and Genre: {#displaying-id-title-genre-impl}
+<a id="displaying-id-title-genre-impl"></a>
+* ### Displaying Id, Title and Genre:
 	The code for this page is at following files:
 
 	At **MovieService:**
@@ -996,7 +1009,8 @@ Now you are able to open the browser using **Blazor UI** with the following path
 
 	```
 
-* ### Create New Page: {#create-new-page-impl}
+<a id="create-new-page-impl"></a>
+* ### Create New Page:
 	The code for this page is at following files:
 
 	I have to modify the **HttpPost** backend endpoint to return the validations with **BadRequest** for incase if user would enter:
@@ -1151,7 +1165,8 @@ Now you are able to open the browser using **Blazor UI** with the following path
 	}
 	```
 
-* ### Update Movie: {#update-movie-impl}
+<a id="update-movie-impl"></a>
+* ### Update Movie:
 	The code for this page is at following files:
 
 	After checking frontend I encounter the issue that I not allowed to enter empty strings in **Title** and **Genre** or **0** in **Year** and **Rating** fields. All I had to do was modify the backend **HttpPut** endpoint at **MoviesController.cs**(for enter empty strings) and **Movie.cs** model (to allow except 0).
@@ -1359,7 +1374,8 @@ Now you are able to open the browser using **Blazor UI** with the following path
 	}
 	```
 
-* ### Delete Movie: {#delete-movie-impl}
+<a id="delete-movie-impl"></a>
+* ### Delete Movie:
 	The code for this page is at following files:
 
 	At **MovieServices.cs:**
@@ -1461,11 +1477,14 @@ Now you are able to open the browser using **Blazor UI** with the following path
 
 	```
 
+<a id="summary"></a>
 ## Summary
 This project is an educational full-stack movie catalog application built with ASP.NET Core Web API and Blazor WebAssembly. It provides an interface for managing movies, including adding, editing, viewing, and deleting entries. The project focuses on understanding HTTP communication, UI state handling, and backend integration. It serves as a learning exercise for exploring the fundamentals of .NET development.
 
+<a id="api-documentation"></a>
 ## API Documentation
 The MovieCatalog_Frntend application interacts with the MovieCatalog Web API. For more information about the API endpoints and usage, please refer to the [API Documentation](https://github.com/your-username/MovieCatalog).
 
+<a id="license"></a>
 ## License
 This project is created for educational and learning purposes only.
