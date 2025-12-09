@@ -1,4 +1,4 @@
-# MovieCatalog Frontend ñ Blazor WebAssembly UI (API Integration)
+# MovieCatalog Frontend ‚Äì Blazor WebAssembly UI (API Integration)
 
 ## Description
 This project provides the user interface (UI) for the MovieCatalog_Frntend application.
@@ -24,6 +24,7 @@ It integrates with the **MovieCatalog Web API** (backend) which need to running 
 - [API Documentation](#api-documentation)
 - [License](#license)
 
+<a id="technologies-used"></a>
 ## Technologies Used
 This Blazor UI application is built using the following technologies:
 
@@ -440,7 +441,7 @@ Now you are able to open the browser using **Blazor UI** with the following path
 
 <a id="all-movies-impl"></a>
 * ### All Movies:
-	That was my first page where I wanted to retrieve data for first time and I had encountered this specific issue. That was happening because of the ìCORSî (Cross-Origin Resource Sharing). Itís a browser security feature that controls how web pages can request resources (like APIs, images, or data) from a different origin (domain, port, or protocol) than the one the page was loaded from. In my case it was blocking access to this API in frontend calls. To solve this issue I have to add unblocking code to the **Program.cs** file in the *ìMovieCatalogî* backend version.
+	That was my first page where I wanted to retrieve data for first time and I had encountered this specific issue. That was happening because of the ‚ÄúCORS‚Äù (Cross-Origin Resource Sharing). It‚Äôs a browser security feature that controls how web pages can request resources (like APIs, images, or data) from a different origin (domain, port, or protocol) than the one the page was loaded from. In my case it was blocking access to this API in frontend calls. To solve this issue I have to add unblocking code to the **Program.cs** file in the *‚ÄúMovieCatalog‚Äù* backend version.
 
 	<img src="./Screenshots_Readme/Screenshot 3.jpg" width="60%"/>
 	<br/><br/>
@@ -1385,7 +1386,7 @@ Now you are able to open the browser using **Blazor UI** with the following path
         /*
             - The backend returns 204 No Content on success, so there's nothing to deserialize.
             - We only need to check if the request was successful (StatusCode 204 or 200).
-            - If the movie doesnít exist, backend returns 404 (Not Found).
+            - If the movie doesn‚Äôt exist, backend returns 404 (Not Found).
          */
         public async Task<bool> DeleteMovieAsync(int id_movie)
         {
@@ -1483,7 +1484,7 @@ This project is an educational full-stack movie catalog application built with A
 
 <a id="api-documentation"></a>
 ## API Documentation
-The MovieCatalog_Frntend application interacts with the MovieCatalog Web API. For more information about the API endpoints and usage, please refer to the [API Documentation](https://github.com/your-username/MovieCatalog).
+The MovieCatalog_Frntend application interacts with the MovieCatalog Web API. For more information about the API endpoints and usage, please refer to the [API Documentation](https://github.com/Chris2240/MovieCatalog_API).
 
 <a id="license"></a>
 ## License
