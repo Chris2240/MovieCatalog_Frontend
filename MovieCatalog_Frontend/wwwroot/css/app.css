@@ -77,8 +77,10 @@ code {
 }
 
 
-/* normalize/remove default spacing that affects page layout */
+/* normalize/remove default spacing that affects page layout & webpage background/fonts color added */
 html, body {
+    background-color: #202020;
+    color: white;
     margin-left: 5px;
     padding: 0;
 }
